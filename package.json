@@ -1,0 +1,25 @@
+{
+  "name": "backend-social-media-app",
+  "version": "1.0.0",
+  "description": "social-media-app backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vysint/Backend-social-media-app.git"
+  },
+  "author": "vincent",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vysint/Backend-social-media-app/issues"
+  },
+  "homepage": "https://github.com/Vysint/Backend-social-media-app#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
