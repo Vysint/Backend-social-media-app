@@ -31,13 +31,16 @@ exports.registerUser = async (req, res, next) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
-  try {
-    const user = await User.findOne({ email: email });
-    if (user) {
-      const validity = await bcrypt.compare(password, user.password);
+  let identifiedUser;
 
-      validity
-        ? res.status(200).json(user)
+  try {
+    identifiedUser = await User.findOne({ email: email });
+
+    if (identifiedUser) {
+      const validPassword = await bcrypt.compare(password, identifiedUser.password);
+
+      validPassword
+        ? res.status(200).json(identifiedUser)
         : res.status(400).json("You entered the wrong Password");
     } else {
       res.status(404).json("User does not exist");
