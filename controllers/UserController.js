@@ -4,7 +4,7 @@ exports.getUser = async (req, res) => {
   const id = req.params.id;
   let user;
   try {
-    user = await User.findById(id);
+    user = await User.findById(id, "-password");
     if (user) {
       res.status(200).json(user);
     }
