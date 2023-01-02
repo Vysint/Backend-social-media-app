@@ -4,8 +4,8 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 
 // Routes
-const authRoutes = require("./routes/AuthRoute");
-
+const authRoutes = require("./routes/AuthRoutes");
+const userRoutes = require("./routes/UserRoutes");
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use("/auth", authRoutes);
-
+app.use("/user", userRoutes);
 
 dotenv.config();
 mongoose.set("strictQuery", true);
