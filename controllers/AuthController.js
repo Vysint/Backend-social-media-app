@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 
 // Registering a new User
-exports.registerUser = async (req, res, next) => {
+exports.signup = async (req, res, next) => {
   const { email, password, firstName, lastName } = req.body;
 
   let hashedPassword;
@@ -28,6 +28,7 @@ exports.registerUser = async (req, res, next) => {
   }
 };
 
+// User Login
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
