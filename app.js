@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 // Routes
 const authRoutes = require("./routes/AuthRoutes");
 const userRoutes = require("./routes/UserRoutes");
+const postRoutes = require("./routes/PostRoutes");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use("/post", postRoutes);
 
 dotenv.config();
 mongoose.set("strictQuery", true);
