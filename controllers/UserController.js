@@ -33,8 +33,27 @@ exports.updateUser = async (req, res) => {
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
+  } else {
+    res.status(403).json("Acces Denied! You can only update your profile");
   }
-  else{
-    res.status(403).json("Acces Denied! You can only update your profile")
+};
+
+// Delete user
+
+exports.deleteUser = async (req, res) => {
+  const id = req.params.id;
+
+  const { userId, isAdminStatus } = req.body;
+
+  if (userId === id || isAdminStatus) {
+    try {
+      await User.findByIdAndDelete(id);
+      res.status(200).json("User deleted successfully!");
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+  else {
+    res.status(500).json("Access Denied! You can only delete your profile.")
   }
 };
