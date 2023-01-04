@@ -12,6 +12,6 @@ router.delete("/:id", userControllers.deleteUser);
 
 router.put("/:id/follow", userControllers.followUser);
 
-router.put("/:id/unfollow", userControllers.unFollowUser);
+router.put("/:id/", userControllers.unFollowUser);
 
 module.exports = router;
