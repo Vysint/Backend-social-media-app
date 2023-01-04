@@ -52,8 +52,60 @@ exports.deleteUser = async (req, res) => {
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
+  } else {
+    res.status(500).json("Access Denied! You can only delete your profile.");
   }
-  else {
-    res.status(500).json("Access Denied! You can only delete your profile.")
+};
+
+// Follow a user
+
+exports.followUser = async (req, res) => {
+  const id = req.params.id;
+
+  const { userId } = req.body;
+
+  if (userId === id) {
+    res.status(403).json("Action forbidden");
+  } else {
+    try {
+      const followedUser = await User.findById(id);
+      const followingUser = await User.findById(userId);
+
+      if (!followedUser.followers.includes(userId)) {
+        await followedUser.updateOne({ $push: { followers: userId } });
+        await followingUser.updateOne({ $push: { following: id } });
+
+        res.status(200).json("User Followed");
+      } else {
+        res.status(500).json("Already following the user.");
+      }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+};
+// unfollow a user
+exports.unFollowUser = async (req, res) => {
+  const id = req.params.id;
+
+  const { userId } = req.body;
+
+  if (userId === id) {
+    res.status(403).json("Action Forbidden");
+  } else {
+    try {
+      const followeduser = await User.findById(id);
+      const followingUser = await User.findById(userId);
+
+      if (followeduser.followers.includes(userId)) {
+        await followeduser.updateOne({ $pull: { followers: userId } });
+        await followingUser.updateOne({ $pull: { following: id } });
+        res.status(200).json("User unfollowed!");
+      } else {
+        res.status(403).json("User is not followed by you1");
+      }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
 };
