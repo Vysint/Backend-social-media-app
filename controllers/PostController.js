@@ -28,12 +28,12 @@ exports.getPost = async (req, res) => {
 // Update a Post
 
 exports.updatePost = async (req, res) => {
-  const id = req.params.id;
+  const postId = req.params.id;
   const { userId } = req.body;
 
   let post;
   try {
-    post = await Post.findById(id);
+    post = await Post.findById(postId);
     if (post.userId === userId) {
       await post.updateOne({ $set: req.body });
       res.status(200).json("Post updated!");
