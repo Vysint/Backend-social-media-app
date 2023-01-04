@@ -44,3 +44,24 @@ exports.updatePost = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Delete a POST
+
+exports.deletePost = async (req, res) => {
+  const postId = req.params.id;
+
+  const { userId } = req.body;
+
+  let post;
+  try {
+    post = await Post.findById(postId);
+    if (post.userId === userId) {
+      await post.deleteOne();
+      res.status(200).json("Post deleted successfully!");
+    } else {
+      res.status(403).json("Action Forbidden!");
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
