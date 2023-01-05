@@ -14,4 +14,6 @@ router.delete("/:id", postControllers.deletePost);
 
 router.put("/:id/likes", postControllers.likePost);
 
+router.get("/:id/timeline", postControllers.getTimelinePosts);
+
 module.exports = router;
